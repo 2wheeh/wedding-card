@@ -6,7 +6,7 @@ export function generateCalendar(year: number, month: number): number[][] {
 	const lastDate = new Date(year, month, 0).getDate();
 
 	const weeks: number[][] = [];
-	let week = new Array(7).fill(undefined); // Create an array of 7 slots filled with undefined
+	let week = Array.from<number>({ length: 7 }).fill(0); // Create an array of 7 slots filled with 0
 
 	for (let date = 1; date <= lastDate; date++) {
 		const currentDay = (firstDay + date - 1) % 7;
@@ -16,7 +16,7 @@ export function generateCalendar(year: number, month: number): number[][] {
 		// to weeks and reset the week array
 		if (currentDay === 6 || date === lastDate) {
 			weeks.push(week);
-			week = new Array(7).fill(undefined);
+			week = Array.from<number>({ length: 7 }).fill(0);
 		}
 	}
 

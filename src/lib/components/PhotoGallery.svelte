@@ -58,15 +58,15 @@
 		isPopupOpen = false;
 	}
 
-	function onClickNextButton(event: MouseEvent) {
+	function onClickNextButton() {
 		swiper.slideNext();
 	}
 
-	function onClickPrevButton(event: MouseEvent) {
+	function onClickPrevButton() {
 		swiper.slidePrev();
 	}
 
-	function onClickCloseButton(event: MouseEvent) {
+	function onClickCloseButton() {
 		isPopupOpen = false;
 	}
 </script>
