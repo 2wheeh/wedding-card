@@ -11,22 +11,6 @@
 	import PhotoFooter from '$lib/components/PhotoFooter.svelte';
 	import PhotoGallery from '$lib/components/PhotoGallery.svelte';
 	import PhotoHeader from '$lib/components/PhotoHeader.svelte';
-
-	// TODO: use assets/og-image instead of glob
-	const ogImg = Object.values(
-		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/photo-*.jpg`, {
-			eager: true,
-			as: 'url',
-		})
-	)
-		.toSorted()
-		.at(-1);
-
-	const openGraphData = {
-		title: `${config.groom.name} ♥ ${config.bride.name} 결혼식 ✿'◡'✿`,
-		description: config.openGraph.description,
-		image: ogImg,
-	};
 </script>
 
 <svelte:head>
@@ -35,9 +19,9 @@
 		property="description"
 		content="{config.bride.fullName}•{config.groom.fullName} 의 결혼식에 초대합니다."
 	/>
-	<meta property="og:title" content={openGraphData.title} />
-	<meta property="og:description" content={openGraphData.description} />
-	<meta property="og:image" content={openGraphData.image} />
+	<meta property="og:title" content={config.openGraph.title} />
+	<meta property="og:description" content={config.openGraph.description} />
+	<meta property="og:image" content={config.openGraph.image} />
 </svelte:head>
 
 <div class="flex-col">

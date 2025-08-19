@@ -2,11 +2,11 @@
 	import { config } from '$lib/config';
 	import { generateCalendar } from '$lib/date';
 
-	const weddingDateKr = new Date(config.date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+	const { date } = config;
 
-	const year = weddingDateKr.getFullYear();
-	const month = weddingDateKr.getMonth();
-	const dateOfMonth = weddingDateKr.getDate();
+	const year = date.getFullYear();
+	const month = date.getMonth();
+	const dateOfMonth = date.getDate();
 	const weeks = generateCalendar(year, month + 1).map((dates) =>
 		dates.map((date) => ({ date, isWeddingDay: date === dateOfMonth }))
 	);
