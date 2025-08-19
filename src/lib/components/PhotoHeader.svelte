@@ -6,7 +6,7 @@
 
 	const dateNums = [
 		date.getFullYear().toString().split(''),
-		date.getMonth().toString().padStart(2, '0').split(''),
+		(date.getMonth() + 1).toString().padStart(2, '0').split(''),
 		date.getDate().toString().padStart(2, '0').split(''),
 	];
 

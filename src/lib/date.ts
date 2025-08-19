@@ -1,12 +1,12 @@
-export function generateCalendar(year: number, month: number): number[][] {
+export function generateCalendar(year: number, month: number): (number | null)[][] {
 	// Get the day of the week for the first day of the month (0: Sunday, 6: Saturday)
 	const firstDay = new Date(year, month - 1, 1).getDay();
 
 	// Get the last date of the month
 	const lastDate = new Date(year, month, 0).getDate();
 
-	const weeks: number[][] = [];
-	let week = Array.from<number>({ length: 7 }).fill(0); // Create an array of 7 slots filled with 0
+	const weeks: (number | null)[][] = [];
+	let week = Array.from<number | null>({ length: 7 }).fill(null); // Create an array of 7 slots filled with null
 
 	for (let date = 1; date <= lastDate; date++) {
 		const currentDay = (firstDay + date - 1) % 7;
@@ -16,7 +16,7 @@ export function generateCalendar(year: number, month: number): number[][] {
 		// to weeks and reset the week array
 		if (currentDay === 6 || date === lastDate) {
 			weeks.push(week);
-			week = Array.from<number>({ length: 7 }).fill(0);
+			week = Array.from<number | null>({ length: 7 }).fill(null);
 		}
 	}
 
