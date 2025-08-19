@@ -1,5 +1,5 @@
 <script lang="ts">
-	const { image }: { image: string } = $props();
+	import footerImage from '$lib/assets/gallery/footer.webp';
 </script>
 
 <div class="relative">
@@ -7,5 +7,5 @@
 		<div class="h-16 w-full bg-white"></div>
 		<div class="absolute h-36 w-full bg-gradient-to-b from-white to-white/0"></div>
 	</div>
-	<img alt="A bride and a groom" src={image} class="w-full" />
+	<img alt="A bride and a groom" src={footerImage} class="w-full" />
 </div>

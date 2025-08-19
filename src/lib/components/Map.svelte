@@ -1,17 +1,9 @@
 <script lang="ts">
-	import { PUBLIC_KAKAO_MAP_API_KEY } from '$env/static/public';
-	import { isMobile } from '$lib/mobile';
 	import { onMount } from 'svelte';
 
-	const {
-		latitude,
-		longitude,
-		links
-	}: {
-		latitude: number;
-		longitude: number;
-		links: { text: string; image: string; href: string; mobileOnly: boolean }[];
-	} = $props();
+	import { PUBLIC_KAKAO_MAP_API_KEY } from '$env/static/public';
+	import { config } from '$lib/config';
+	import { isMobile } from '$lib/mobile';
 
 	let mapElement: HTMLDivElement | null = null;
 	let mobile = $state(false);
@@ -24,14 +16,14 @@
 		if (!mapElement) return;
 
 		const options = {
-			center: new kakao.maps.LatLng(latitude, longitude),
-			level: 4
+			center: new kakao.maps.LatLng(config.map.lagitude, config.map.longitude),
+			level: 4,
 		} satisfies kakao.maps.MapOptions;
 		const map = new kakao.maps.Map(mapElement, options);
 
-		const markerPosition = new kakao.maps.LatLng(latitude, longitude);
+		const markerPosition = new kakao.maps.LatLng(config.map.lagitude, config.map.longitude);
 		const marker = new kakao.maps.Marker({
-			position: markerPosition
+			position: markerPosition,
 		});
 		marker.setMap(map);
 	});

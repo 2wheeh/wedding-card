@@ -1,8 +1,44 @@
 <script lang="ts">
 	import type { AccountData } from '$lib/account';
+	import { config } from '$lib/config';
 	import { addToast } from '$lib/states/toast-state.svelte';
 
-	const { accounts }: { accounts: AccountData[][] } = $props();
+	const accounts = [
+		[
+			{
+				ownerName: config.groom.fullName,
+				bank: config.groom.bankName,
+				number: config.groom.accountNumber,
+			},
+			{
+				ownerName: config.groom.father.fullName,
+				bank: config.groom.father.bankName,
+				number: config.groom.father.accountNumber,
+			},
+			{
+				ownerName: config.groom.mother.fullName,
+				bank: config.groom.mother.bankName,
+				number: config.groom.mother.accountNumber,
+			},
+		],
+		[
+			{
+				ownerName: config.bride.fullName,
+				bank: config.bride.bankName,
+				number: config.bride.accountNumber,
+			},
+			{
+				ownerName: config.bride.father.fullName,
+				bank: config.bride.father.bankName,
+				number: config.bride.father.accountNumber,
+			},
+			{
+				ownerName: config.bride.mother.fullName,
+				bank: config.bride.mother.bankName,
+				number: config.bride.mother.accountNumber,
+			},
+		],
+	] satisfies AccountData[][];
 
 	function onClickCopyButton(name: string, account: string): () => void {
 		return () => {

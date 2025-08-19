@@ -1,18 +1,34 @@
 <script lang="ts">
-	import type { PhotoSet } from '$lib/photo';
 	import Swiper from 'swiper';
 	import 'swiper/css';
 	import { Navigation, Pagination } from 'swiper/modules';
 
-	const { photos }: { photos: PhotoSet[] } = $props();
 	import ArrowIconThick from '$lib/assets/icons/ArrowIconThick.svelte';
 	import CrossIconThick from '$lib/assets/icons/CrossIconThick.svelte';
+
+	const thumbnails = Object.values(
+		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/*.jpg`, {
+			eager: true,
+			as: 'url',
+		})
+	).toSorted();
+
+	const fullImages = Object.values(
+		import.meta.glob<string>(`$lib/assets/gallery/original/*.jpg`, {
+			eager: true,
+			as: 'url',
+		})
+	).toSorted();
+
+	if (thumbnails.length !== fullImages.length) {
+		throw new Error('Thumbnails and full images count mismatch');
+	}
 
 	let swiper: Swiper;
 	let swiperIndex: number = $state(0);
 	let isPopupOpen = $state(false);
 	let isFirstSlide = $derived(swiperIndex === 0);
-	let isLastSlide = $derived(swiperIndex === photos.length - 1);
+	let isLastSlide = $derived(swiperIndex === thumbnails.length - 1);
 
 	$effect(() => {
 		swiper = new Swiper('.swiper', {
@@ -72,8 +88,8 @@
 </script>
 
 <svelte:head>
-	{#each photos as photo}
-		<link rel="prefetch" href={photo.full} />
+	{#each fullImages as fullImage}
+		<link rel="prefetch" href={fullImage} />
 	{/each}
 
 	{#if isPopupOpen}
@@ -90,9 +106,9 @@
 <div>
 	<!-- Thumbnail view -->
 	<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-5">
-		{#each photos as photo, i}
+		{#each thumbnails as thumbnail, i}
 			<button onclick={() => openPopup(i)} class="block outline-none">
-				<img alt="wedding couple shot" src={photo.thumbnail} />
+				<img alt="wedding couple shot" src={thumbnail} />
 			</button>
 		{/each}
 	</div>
@@ -115,11 +131,11 @@
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
 					<!-- Slides -->
-					{#each photos as photo}
+					{#each fullImages as fullImage}
 						<div class="swiper-slide">
 							<img
 								alt="detailed wedding shot"
-								src={photo.full}
+								src={fullImage}
 								class="block h-full w-full object-contain"
 							/>
 						</div>

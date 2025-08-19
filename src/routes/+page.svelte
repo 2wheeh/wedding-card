@@ -1,28 +1,6 @@
 <script lang="ts">
-	import {
-		PUBLIC_BRIDE_ACCOUNT_NUMBER,
-		PUBLIC_BRIDE_BANK_NAME,
-		PUBLIC_BRIDE_FATHER_ACCOUNT_NUMBER,
-		PUBLIC_BRIDE_FATHER_BANK_NAME,
-		PUBLIC_BRIDE_FATHER_FULL_NAME,
-		PUBLIC_BRIDE_FULL_NAME,
-		PUBLIC_BRIDE_MOTHER_ACCOUNT_NUMBER,
-		PUBLIC_BRIDE_MOTHER_BANK_NAME,
-		PUBLIC_BRIDE_MOTHER_FULL_NAME,
-		PUBLIC_BRIDE_NAME,
-		PUBLIC_CDN_BASE,
-		PUBLIC_GROOM_ACCOUNT_NUMBER,
-		PUBLIC_GROOM_BANK_NAME,
-		PUBLIC_GROOM_FATHER_ACCOUNT_NUMBER,
-		PUBLIC_GROOM_FATHER_BANK_NAME,
-		PUBLIC_GROOM_FATHER_FULL_NAME,
-		PUBLIC_GROOM_FULL_NAME,
-		PUBLIC_GROOM_MOTHER_ACCOUNT_NUMBER,
-		PUBLIC_GROOM_MOTHER_BANK_NAME,
-		PUBLIC_GROOM_MOTHER_FULL_NAME,
-		PUBLIC_GROOM_NAME,
-	} from '$env/static/public';
-	import type { AccountData } from '$lib/account';
+	import { config } from '$lib/config';
+
 	import BankAccount from '$lib/components/BankAccount.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
 	import CenterText from '$lib/components/CenterText.svelte';
@@ -33,230 +11,29 @@
 	import PhotoFooter from '$lib/components/PhotoFooter.svelte';
 	import PhotoGallery from '$lib/components/PhotoGallery.svelte';
 	import PhotoHeader from '$lib/components/PhotoHeader.svelte';
-	import type { PhotoSet } from '$lib/photo';
-	import type { CenterTextData } from '$lib/text';
+
+	// TODO: use assets/og-image instead of glob
+	const ogImg = Object.values(
+		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/photo-*.jpg`, {
+			eager: true,
+			as: 'url',
+		})
+	)
+		.toSorted()
+		.at(-1);
 
 	const openGraphData = {
-		title: `${PUBLIC_GROOM_NAME} ♥ ${PUBLIC_BRIDE_NAME} 결혼식 ✿'◡'✿`,
-		description: '2025년 3월 30일 낮 12시30분',
-		image: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-11.jpg`,
+		title: `${config.groom.name} ♥ ${config.bride.name} 결혼식 ✿'◡'✿`,
+		description: config.openGraph.description,
+		image: ogImg,
 	};
-
-	const photoHeader = {
-		dateNums: [
-			['2', '5'],
-			['0', '3'],
-			['3', '0'],
-		],
-		dayOfWeek: ['S', 'U', 'N', 'D', 'A', 'Y'],
-		image: `${PUBLIC_CDN_BASE}/gallery/original/photo-header.jpg`,
-	};
-
-	const photoFooter = {
-		image: `${PUBLIC_CDN_BASE}/gallery/original/photo-footer.jpg`,
-	};
-
-	const photos = [
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-1.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-1.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-2.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-2.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-3-1.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-3-1.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-3-2.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-3-2.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-3-3.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-3-3.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-4.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-4.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-5.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-5.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-6-1.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-6-1.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-6-2.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-6-2.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-7.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-7.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-8-1.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-8-1.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-9.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-9.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-10.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-10.jpg`,
-		},
-		{
-			thumbnail: `${PUBLIC_CDN_BASE}/gallery/thumbnail/photo-11.jpg`,
-			full: `${PUBLIC_CDN_BASE}/gallery/original/photo-11.jpg`,
-		},
-	] satisfies PhotoSet[];
-
-	const mapData = {
-		latitude: 37.50084,
-		longitude: 127.00318,
-		links: [
-			{
-				text: '카카오맵',
-				image: `${PUBLIC_CDN_BASE}/miscs/icon-kakao-map.webp`,
-				href: `https://map.kakao.com/link/map/1807085957`,
-				mobileOnly: false,
-			},
-			{
-				text: '네이버지도',
-				image: `${PUBLIC_CDN_BASE}/miscs/icon-naver-map.webp`,
-				href: 'https://naver.me/xM2E86s2',
-				mobileOnly: false,
-			},
-			{
-				text: '티맵',
-				image: `${PUBLIC_CDN_BASE}/miscs/icon-tmap.png`,
-				href: 'tmap://search?name=%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EB%B0%98%ED%8F%AC',
-				mobileOnly: true,
-			},
-		],
-	};
-
-	const coupleNames = {
-		bride: `${PUBLIC_BRIDE_FULL_NAME}`,
-		groom: `${PUBLIC_GROOM_FULL_NAME}`,
-	};
-
-	const familyNames = {
-		groom: `${PUBLIC_GROOM_NAME}`,
-		groomFather: `${PUBLIC_GROOM_FATHER_FULL_NAME}`,
-		groomMother: `${PUBLIC_GROOM_MOTHER_FULL_NAME}`,
-		bride: `${PUBLIC_BRIDE_NAME}`,
-		brideFather: `${PUBLIC_BRIDE_FATHER_FULL_NAME}`,
-		brideMother: `${PUBLIC_BRIDE_MOTHER_FULL_NAME}`,
-	};
-
-	const invitationTextData = {
-		title: 'INVITATION',
-		paragraphs: [
-			{
-				body: '서로의 반려자로서\n평생을 함께할 것을 맹세하는 날,\n꽃피는 봄의 따스한 기운 속에서\n저희 두 사람의 새로운 시작과\n앞날의 소중한 첫걸음을\n따뜻한 마음으로\n지켜봐 주시고 축복해 주시면\n감사하겠습니다.',
-			},
-		],
-	} satisfies CenterTextData;
-
-	const scheduleTextData = {
-		paragraphs: [
-			{
-				subTitle: '2025년 3월 30일 일요일 낮 12시 30분\n아펠가모 반포 LL층 단독홀',
-			},
-		],
-	} satisfies CenterTextData;
-
-	const locationTextData = {
-		title: 'LOCATION',
-		paragraphs: [
-			{
-				body: '아펠가모 반포 LL층 단독홀\n서울 서초구 반포대로 235 효성빌딩 LL층',
-			},
-		],
-	} satisfies CenterTextData;
-
-	const transportationTextData = {
-		paragraphs: [
-			{
-				subTitle: '버스',
-				body: '서울지방조달청.서울성모병원\n405, 740, 5413',
-			},
-			{
-				subTitle: '지하철',
-				body: '고속터미널역 5번 출구\n3호선, 7호선, 9호선',
-			},
-			{
-				subTitle: '주차안내',
-				body: '건물 내 B3-B5 2시간 무료주차',
-			},
-		],
-	} satisfies CenterTextData;
-
-	const accounts = [
-		[
-			{
-				ownerName: `${PUBLIC_GROOM_FULL_NAME}`,
-				bank: `${PUBLIC_GROOM_BANK_NAME}`,
-				number: `${PUBLIC_GROOM_ACCOUNT_NUMBER}`,
-			},
-			{
-				ownerName: `${PUBLIC_GROOM_FATHER_FULL_NAME}`,
-				bank: `${PUBLIC_GROOM_FATHER_BANK_NAME}`,
-				number: `${PUBLIC_GROOM_FATHER_ACCOUNT_NUMBER}`,
-			},
-			{
-				ownerName: `${PUBLIC_GROOM_MOTHER_FULL_NAME}`,
-				bank: `${PUBLIC_GROOM_MOTHER_BANK_NAME}`,
-				number: `${PUBLIC_GROOM_MOTHER_ACCOUNT_NUMBER}`,
-			},
-		],
-		[
-			{
-				ownerName: `${PUBLIC_BRIDE_FULL_NAME}`,
-				bank: `${PUBLIC_BRIDE_BANK_NAME}`,
-				number: `${PUBLIC_BRIDE_ACCOUNT_NUMBER}`,
-			},
-			{
-				ownerName: `${PUBLIC_BRIDE_FATHER_FULL_NAME}`,
-				bank: `${PUBLIC_BRIDE_FATHER_BANK_NAME}`,
-				number: `${PUBLIC_BRIDE_FATHER_ACCOUNT_NUMBER}`,
-			},
-			{
-				ownerName: `${PUBLIC_BRIDE_MOTHER_FULL_NAME}`,
-				bank: `${PUBLIC_BRIDE_MOTHER_BANK_NAME}`,
-				number: `${PUBLIC_BRIDE_MOTHER_ACCOUNT_NUMBER}`,
-			},
-		],
-	] satisfies AccountData[][];
-
-	const wreathTextData = {
-		paragraphs: [
-			{
-				subTitle: '축하화환 안내',
-				body: '화환은 정중히 사양합니다.\n좋은 마음만 감사히 받겠습니다.',
-			},
-		],
-	} satisfies CenterTextData;
-
-	const footerTextData = {
-		paragraphs: [
-			{
-				body: '응원하고 격려해주신 모든 분들께\n감사드리며\n행복하게 잘 살겠습니다.',
-			},
-		],
-	} satisfies CenterTextData;
 </script>
 
 <svelte:head>
-	<title>{`${PUBLIC_GROOM_NAME}`}•{`${PUBLIC_BRIDE_NAME}`} 청첩장</title>
+	<title>{config.groom.name}•{config.bride.name} 청첩장</title>
 	<meta
 		property="description"
-		content="{coupleNames.groom}•{coupleNames.bride} 의 결혼식에 초대합니다."
+		content="{config.bride.fullName}•{config.groom.fullName} 의 결혼식에 초대합니다."
 	/>
 	<meta property="og:title" content={openGraphData.title} />
 	<meta property="og:description" content={openGraphData.description} />
@@ -265,58 +42,54 @@
 
 <div class="flex-col">
 	<div>
-		<PhotoHeader
-			dateNums={photoHeader.dateNums}
-			dayOfWeek={photoHeader.dayOfWeek}
-			image={photoHeader.image}
-		/>
+		<PhotoHeader />
 	</div>
 	<div class="my-14">
-		<CoupleName brideName={coupleNames.bride} groomName={coupleNames.groom} />
+		<CoupleName />
 	</div>
 	<div class="my-20">
 		<FlowerBand />
 	</div>
 	<div class="mt-20">
-		<CenterText textData={invitationTextData} />
+		<CenterText textData={config.text.invitation} />
 	</div>
 	<div class="mt-24">
-		<PhotoGallery {photos} />
+		<PhotoGallery />
 	</div>
 	<div class="mt-14">
-		<Family {...familyNames} />
+		<Family />
 	</div>
 	<div class="mt-20">
-		<CenterText textData={scheduleTextData} />
+		<CenterText textData={config.text.schedule} />
 	</div>
 	<div class="mt-24">
-		<Calendar weddingDate={new Date(2025, 2, 30)} />
+		<Calendar />
 	</div>
 	<div class="mt-20">
-		<CenterText textData={locationTextData} />
+		<CenterText textData={config.text.location} />
 	</div>
 	<div class="mt-10">
-		<Map latitude={mapData.latitude} longitude={mapData.longitude} links={mapData.links} />
+		<Map />
 	</div>
 	<div class="mt-12">
-		<CenterText textData={transportationTextData} />
+		<CenterText textData={config.text.transportation} />
 	</div>
 	<div class="my-32">
 		<FlowerBand />
 	</div>
 	<div class="my-10">
-		<BankAccount {accounts} />
+		<BankAccount />
 	</div>
 	<div class="my-24">
-		<CenterText textData={wreathTextData} />
+		<CenterText textData={config.text.wreath} />
 	</div>
 	<div class="my-24">
 		<FlowerBand />
 	</div>
 	<div class="my-12">
-		<CenterText textData={footerTextData} />
+		<CenterText textData={config.text.footer} />
 	</div>
 	<div>
-		<PhotoFooter image={photoFooter.image} />
+		<PhotoFooter />
 	</div>
 </div>

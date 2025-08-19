@@ -1,9 +1,20 @@
 <script lang="ts">
-	const {
-		dateNums,
-		dayOfWeek,
-		image
-	}: { dateNums: string[][]; dayOfWeek: string[]; image: string } = $props();
+	import { config } from '$lib/config';
+	import headerImage from '$lib/assets/gallery/header.webp';
+
+	const { date } = config;
+	const weddingDateKr = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+
+	const dateNums = [
+		weddingDateKr.getFullYear().toString().split(''),
+		weddingDateKr.getMonth().toString().padStart(2, '0').split(''),
+		weddingDateKr.getDate().toString().padStart(2, '0').split(''),
+	];
+
+	const dayOfWeek = weddingDateKr
+		.toLocaleDateString('en-US', { weekday: 'long' })
+		.toUpperCase()
+		.split('');
 </script>
 
 <div class="relative">
@@ -29,5 +40,5 @@
 			</p>
 		</div>
 	</span>
-	<img alt="A bride and a groom" src={image} class="w-full" />
+	<img alt="A bride and a groom" src={headerImage} class="w-full" />
 </div>

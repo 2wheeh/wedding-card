@@ -1,19 +1,5 @@
 <script lang="ts">
-	const {
-		groom,
-		groomFather,
-		groomMother,
-		bride,
-		brideFather,
-		brideMother
-	}: {
-		groom: string;
-		groomFather: string;
-		groomMother: string;
-		bride: string;
-		brideFather: string;
-		brideMother: string;
-	} = $props();
+	import { config } from '$lib/config';
 </script>
 
 {#snippet relationLine(father: string, mother: string, relation: string, name: string)}
@@ -24,6 +10,16 @@
 {/snippet}
 
 <div class="flex flex-col gap-y-2 px-2">
-	{@render relationLine(groomFather, groomMother, '아들', groom)}
-	{@render relationLine(brideFather, brideMother, '딸', bride)}
+	{@render relationLine(
+		config.groom.father.fullName,
+		config.groom.mother.fullName,
+		'아들',
+		config.groom.fullName
+	)}
+	{@render relationLine(
+		config.bride.father.fullName,
+		config.bride.mother.fullName,
+		'딸',
+		config.bride.fullName
+	)}
 </div>

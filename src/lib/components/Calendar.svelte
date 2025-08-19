@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { config } from '$lib/config';
 	import { generateCalendar } from '$lib/date';
 
-	const { weddingDate }: { weddingDate: Date } = $props();
-	const weddingDateKr = new Date(weddingDate.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+	const weddingDateKr = new Date(config.date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
 
 	const year = weddingDateKr.getFullYear();
 	const month = weddingDateKr.getMonth();
