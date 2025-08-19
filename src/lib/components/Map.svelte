@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_KAKAO_MAP_API_KEY } from '$env/static/public';
 	import { isMobile } from '$lib/mobile';
+	import { onMount } from 'svelte';
 
 	const {
 		latitude,
@@ -12,9 +13,16 @@
 		links: { text: string; image: string; href: string; mobileOnly: boolean }[];
 	} = $props();
 
-	let mapElement: HTMLDivElement;
+	let mapElement: HTMLDivElement | null = null;
+	let mobile = $state(false);
+
+	onMount(() => {
+		mobile = isMobile();
+	});
 
 	$effect(() => {
+		if (!mapElement) return;
+
 		const options = {
 			center: new kakao.maps.LatLng(latitude, longitude),
 			level: 4
@@ -27,18 +35,6 @@
 		});
 		marker.setMap(map);
 	});
-
-	function onMobileOnlyClick(
-		event: MouseEvent & {
-			currentTarget: EventTarget & HTMLSpanElement;
-		}
-	) {
-		if (!isMobile()) {
-			event.preventDefault();
-			alert(`모바일에서만 실행 가능해요 📱`);
-			return;
-		}
-	}
 </script>
 
 <svelte:head>
@@ -48,28 +44,15 @@
 	></script>
 </svelte:head>
 
-{#snippet mapLinkButton(imageSrc: string, text: string)}
-	<img alt="Map icon" src={imageSrc} class="inline-block h-4" /><span
-		class="ml-1 inline-block text-sm text-gray-600">{text}</span
-	>
-{/snippet}
-
 <div>
 	<div bind:this={mapElement} id="map" class="mx-auto h-[300px] w-full"></div>
 	<div class="mt-2 flex justify-stretch divide-x">
-		{#each links as link}
-			<div class="flex flex-1 justify-center">
-				<div>
-					{#if link.mobileOnly}
-						<a href={link.href} target="_blank" onclick={onMobileOnlyClick}>
-							{@render mapLinkButton(link.image, link.text)}
-						</a>
-					{:else}
-						<a href={link.href} target="_blank">
-							{@render mapLinkButton(link.image, link.text)}
-						</a>
-					{/if}
-				</div>
+		{#each config.map.links as link}
+			<div class="flex flex-1 justify-center {!mobile && link.mobileOnly ? 'hidden' : ''}">
+				<a href={link.href} target="_blank">
+					<img alt="Map icon" src={link.image} class="inline-block h-6 w-6" />
+					<span class="ml-1 inline-block text-sm text-gray-600">{link.text}</span>
+				</a>
 			</div>
 		{/each}
 	</div>
