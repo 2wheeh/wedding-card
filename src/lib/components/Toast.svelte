@@ -1,13 +1,14 @@
 <script lang="ts">
-	import CrossIcon from '$lib/components/icons/CrossIcon.svelte';
+	import { Tween } from 'svelte/motion';
+
+	import CrossIcon from '$lib/assets/icons/CrossIcon.svelte';
 	import { PausableTimer } from '$lib/pausable-timer';
 	import { deleteToast } from '$lib/states/toast-state.svelte';
-	import { Tween } from 'svelte/motion';
 
 	const {
 		id,
 		message,
-		timeout = 3000
+		timeout = 3000,
 	}: { id: number; message: string; timeout?: number } = $props();
 
 	const progress = new Tween(0, { duration: timeout });

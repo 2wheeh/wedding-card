@@ -1,12 +1,12 @@
 <script lang="ts">
-	import ArrowIconThick from '$lib/components/icons/ArrowIconThick.svelte';
-	import CrossIconThick from '$lib/components/icons/CrossIconThick.svelte';
 	import type { PhotoSet } from '$lib/photo';
 	import Swiper from 'swiper';
 	import 'swiper/css';
 	import { Navigation, Pagination } from 'swiper/modules';
 
 	const { photos }: { photos: PhotoSet[] } = $props();
+	import ArrowIconThick from '$lib/assets/icons/ArrowIconThick.svelte';
+	import CrossIconThick from '$lib/assets/icons/CrossIconThick.svelte';
 
 	let swiper: Swiper;
 	let swiperIndex: number = $state(0);
