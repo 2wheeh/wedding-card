@@ -8,13 +8,13 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Arvo', ...defaultTheme.fontFamily.sans],
-				serif: ['Nanum Myeongjo', ...defaultTheme.fontFamily.serif]
+				serif: ['Nanum Myeongjo', ...defaultTheme.fontFamily.serif],
 			},
 			lineHeight: {
-				'extra-loose': '2.5'
-			}
-		}
+				'extra-loose': '2.5',
+			},
+		},
 	},
 
-	plugins: []
+	plugins: [],
 } satisfies Config;

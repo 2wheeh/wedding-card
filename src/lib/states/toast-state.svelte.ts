@@ -15,7 +15,7 @@ export function addToast(message: string, option?: { timeout?: number }) {
 	toastState.toasts.push({
 		id: toastState.nextId++,
 		message,
-		timeout: option?.timeout
+		timeout: option?.timeout,
 	});
 }
 
