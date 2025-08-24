@@ -7,14 +7,14 @@
 	import CrossIconThick from '$lib/assets/icons/CrossIconThick.svelte';
 
 	const thumbnails = Object.values(
-		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/*.jpg`, {
+		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/*`, {
 			eager: true,
 			as: 'url',
 		})
 	).toSorted();
 
 	const fullImages = Object.values(
-		import.meta.glob<string>(`$lib/assets/gallery/original/*.jpg`, {
+		import.meta.glob<string>(`$lib/assets/gallery/original/*`, {
 			eager: true,
 			as: 'url',
 		})
