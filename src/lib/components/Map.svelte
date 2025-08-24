@@ -15,16 +15,15 @@
 	$effect(() => {
 		if (!mapElement) return;
 
+		const coord = new kakao.maps.LatLng(config.map.lagitude, config.map.longitude);
+
 		const options = {
-			center: new kakao.maps.LatLng(config.map.lagitude, config.map.longitude),
+			center: coord,
 			level: 4,
 		} satisfies kakao.maps.MapOptions;
 		const map = new kakao.maps.Map(mapElement, options);
 
-		const markerPosition = new kakao.maps.LatLng(config.map.lagitude, config.map.longitude);
-		const marker = new kakao.maps.Marker({
-			position: markerPosition,
-		});
+		const marker = new kakao.maps.Marker({ position: coord });
 		marker.setMap(map);
 	});
 </script>
