@@ -115,13 +115,13 @@ const map = {
 			href: 'https://naver.me/5VmQvsvf',
 			mobileOnly: false,
 		},
-		{
-			text: '티맵',
-			image: '/icons/icon-tmap.png',
-			// TODO: update tmap link
-			href: 'tmap://search?name=%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EB%B0%98%ED%8F%AC',
-			mobileOnly: true,
-		},
+		// {
+		// 	text: '티맵',
+		// 	image: '/icons/icon-tmap.png',
+		// 	// TODO: update tmap link
+		// 	href: 'tmap://search?name=%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EB%B0%98%ED%8F%AC',
+		// 	mobileOnly: true,
+		// },
 	] satisfies {
 		text: string;
 		image: string;
