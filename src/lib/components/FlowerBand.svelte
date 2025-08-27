@@ -2,7 +2,8 @@
 	const flowerImages = Object.values(
 		import.meta.glob<string>('$lib/assets/misc/flower-*.png', {
 			eager: true,
-			as: 'url',
+			query: '?url',
+			import: 'default',
 		})
 	);
 </script>

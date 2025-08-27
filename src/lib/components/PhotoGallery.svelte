@@ -9,14 +9,16 @@
 	const thumbnails = Object.values(
 		import.meta.glob<string>(`$lib/assets/gallery/thumbnail/*`, {
 			eager: true,
-			as: 'url',
+			query: '?url',
+			import: 'default',
 		})
 	);
 
 	const fullImages = Object.values(
 		import.meta.glob<string>(`$lib/assets/gallery/original/*`, {
 			eager: true,
-			as: 'url',
+			query: '?url',
+			import: 'default',
 		})
 	);
 
