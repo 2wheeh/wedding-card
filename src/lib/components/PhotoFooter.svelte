@@ -1,5 +1,5 @@
 <script lang="ts">
-	import footerImage from '$lib/assets/gallery/footer.png';
+	import footerImage from '$lib/assets/gallery/footer.webp';
 </script>
 
 <div class="relative">

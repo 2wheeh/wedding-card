@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { config } from '$lib/config';
-	import headerImage from '$lib/assets/gallery/header.png';
+	import headerImage from '$lib/assets/gallery/header.webp';
 
 	const { date } = config;
 
