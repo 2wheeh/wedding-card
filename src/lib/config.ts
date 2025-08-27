@@ -1,46 +1,46 @@
 import type { CenterTextData } from './text';
 
 const bride = {
-	name: '마릴리',
-	fullName: '마릴리',
+	name: '영수',
+	fullName: '이영수',
+	bankName: '국민은행',
+	accountNumber: '041302-04-076530',
 	father: {
-		fullName: '메타몽',
-		bankName: '한국은행',
-		accountNumber: '123456-00-123456',
+		fullName: '이선배',
+		bankName: '신한은행',
+		accountNumber: '110-066-490900',
 	},
 	mother: {
-		fullName: '메타몽',
-		bankName: '한국은행',
-		accountNumber: '123456-00-123456',
+		fullName: '전나영',
+		bankName: '우리은행',
+		accountNumber: '446-07-034995',
 	},
-	bankName: '한국은행',
-	accountNumber: '123456-00-123456',
 };
 
 const groom = {
-	name: '데덴네',
-	fullName: '데덴네',
+	name: '원희',
+	fullName: '이원희',
+	bankName: '신한은행',
+	accountNumber: '110-412-031248',
 	father: {
-		fullName: '메타몽',
-		bankName: '한국은행',
-		accountNumber: '123456-00-123456',
+		fullName: '이상학',
+		bankName: '국민은행',
+		accountNumber: '434701-01-194050',
 	},
 	mother: {
-		fullName: '메타몽',
-		bankName: '한국은행',
-		accountNumber: '123456-00-123456',
+		fullName: '양경희',
+		bankName: '국민은행',
+		accountNumber: '439225-91-115604',
 	},
-	bankName: '한국은행',
-	accountNumber: '123456-00-123456',
 };
 
 const openGraph = {
 	title: `${groom.name} ♥ ${bride.name} 결혼식 ✿'◡'✿`,
-	description: `2025년 3월 30일 낮 12시 30분`,
+	description: `2025년 10월 12일 낮 3시`,
 	image: '/og-img.webp',
 };
 
-const date = new Date(2025, 2, 30, 12, 30);
+const date = new Date(2025, 9, 12, 15, 0);
 
 const text = {
 	invitation: {
@@ -54,7 +54,7 @@ const text = {
 	schedule: {
 		paragraphs: [
 			{
-				subTitle: '2025년 3월 30일 일요일 낮 12시 30분\n아펠가모 반포 LL층 단독홀',
+				subTitle: '2025년 10월 12일 일요일 낮 3시\n소노펠리체 컨벤션 3층 다이아몬드홀',
 			},
 		],
 	},
@@ -62,7 +62,7 @@ const text = {
 		title: 'LOCATION',
 		paragraphs: [
 			{
-				body: '아펠가모 반포 LL층 단독홀\n서울 서초구 반포대로 235 효성빌딩 LL층',
+				body: '소노펠리체 컨벤션 3층 다이아몬드홀\n서울 강남구 테헤란로87길 22 도심공항터미널 3층',
 			},
 		],
 	},
@@ -70,15 +70,15 @@ const text = {
 		paragraphs: [
 			{
 				subTitle: '버스',
-				body: '서울지방조달청.서울성모병원\n405, 740, 5413',
+				body: '한국무역센터삼성역\n146, 333, 341',
 			},
 			{
 				subTitle: '지하철',
-				body: '고속터미널역 5번 출구\n3호선, 7호선, 9호선',
+				body: '2호선 삼성역 5번 출구\n9호선 봉은사역 7번 출구',
 			},
 			{
 				subTitle: '주차안내',
-				body: '건물 내 B3-B5 2시간 무료주차',
+				body: '한국도심공항 터미널 주차장',
 			},
 		],
 	},
@@ -100,24 +100,25 @@ const text = {
 } satisfies Record<string, CenterTextData>;
 
 const map = {
-	lagitude: 37.50084,
-	longitude: 127.00795,
+	lagitude: 37.5096322564759,
+	longitude: 127.059443354483,
 	links: [
 		{
 			text: '카카오맵',
 			image: '/icons/icon-kakao-map.webp',
-			href: `https://map.kakao.com/link/map/1807085957`,
+			href: `https://kko.kakao.com/f8BgPM965l`,
 			mobileOnly: false,
 		},
 		{
 			text: '네이버지도',
 			image: '/icons/icon-naver-map.webp',
-			href: 'https://naver.me/xM2E86s2',
+			href: 'https://naver.me/5VmQvsvf',
 			mobileOnly: false,
 		},
 		{
 			text: '티맵',
 			image: '/icons/icon-tmap.png',
+			// TODO: update tmap link
 			href: 'tmap://search?name=%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EB%B0%98%ED%8F%AC',
 			mobileOnly: true,
 		},

@@ -11,14 +11,14 @@
 			eager: true,
 			as: 'url',
 		})
-	).toSorted();
+	);
 
 	const fullImages = Object.values(
 		import.meta.glob<string>(`$lib/assets/gallery/original/*`, {
 			eager: true,
 			as: 'url',
 		})
-	).toSorted();
+	);
 
 	if (thumbnails.length !== fullImages.length) {
 		throw new Error('Thumbnails and full images count mismatch');
