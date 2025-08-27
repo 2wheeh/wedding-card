@@ -37,7 +37,7 @@ const groom = {
 const openGraph = {
 	title: `${groom.name} ♥ ${bride.name} 결혼식 ✿'◡'✿`,
 	description: `2025년 10월 12일 낮 3시`,
-	image: '/og-img.webp',
+	image: '/og-img2.webp',
 };
 
 const date = new Date(2025, 9, 12, 15, 0);
