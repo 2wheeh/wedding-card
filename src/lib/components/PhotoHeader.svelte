@@ -14,8 +14,8 @@
 </script>
 
 <div class="relative">
-	<div class="h-32 w-full bg-[#c6d0d2] sm:h-48"></div>
-	<div class="absolute z-10 h-10 w-full bg-gradient-to-b from-[#c6d0d2] to-white/0 sm:h-28"></div>
+	<div class="h-32 w-full bg-[#babbbb] sm:h-48"></div>
+	<div class="absolute z-10 h-14 w-full bg-gradient-to-b from-[#babbbb] to-white/0 sm:h-28"></div>
 	<span class="font-sans text-3xl md:text-4xl">
 		<div
 			class="absolute top-6 z-10 flex w-full flex-col content-center items-center justify-center sm:top-24"
