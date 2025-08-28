@@ -13,7 +13,7 @@
 	{@render relationLine(
 		config.groom.father.fullName,
 		config.groom.mother.fullName,
-		'아들',
+		'외아들',
 		config.groom.fullName
 	)}
 	{@render relationLine(
