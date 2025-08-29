@@ -13,13 +13,13 @@
 	{@render relationLine(
 		config.groom.father.fullName,
 		config.groom.mother.fullName,
-		'아들',
+		config.groom.relationShip,
 		config.groom.fullName
 	)}
 	{@render relationLine(
 		config.bride.father.fullName,
 		config.bride.mother.fullName,
-		'딸',
+		config.bride.relationShip,
 		config.bride.fullName
 	)}
 </div>

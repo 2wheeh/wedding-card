@@ -4,6 +4,7 @@ const bride = {
 	name: '영수',
 	fullName: '이영수',
 	bankName: '국민은행',
+	relationShip: '차녀',
 	accountNumber: '041302-04-076530',
 	father: {
 		fullName: '이선배',
@@ -21,6 +22,7 @@ const groom = {
 	name: '원희',
 	fullName: '이원희',
 	bankName: '신한은행',
+	relationShip: '외아들',
 	accountNumber: '110-412-031248',
 	father: {
 		fullName: '이상학',
