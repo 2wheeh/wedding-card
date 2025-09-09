@@ -33,13 +33,24 @@
 	let isLastSlide = $derived(swiperIndex === thumbnails.length - 1);
 
 	$effect(() => {
-		swiper = new Swiper('.swiper', {
+		const thumbnailSwiper = new Swiper('.thumbnail-swiper', {
+			slidesPerView: 'auto',
+			spaceBetween: 8,
+			freeMode: true,
+		});
+
+		swiper = new Swiper('.popup-swiper', {
 			modules: [Navigation, Pagination],
 			on: {
 				activeIndexChange: (swiper) => (swiperIndex = swiper.activeIndex),
 			},
 			spaceBetween: 30,
 		});
+
+		return () => {
+			swiper.destroy();
+			thumbnailSwiper.destroy();
+		};
 	});
 
 	function openPopup(i: number) {
@@ -107,12 +118,22 @@
 
 <div>
 	<!-- Thumbnail view -->
-	<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-5">
-		{#each thumbnails as thumbnail, i}
-			<button onclick={() => openPopup(i)} class="block outline-none">
-				<img alt="wedding couple shot" src={thumbnail} />
-			</button>
-		{/each}
+	<div class="thumbnail-swiper w-full overflow-hidden pb-2">
+		<div class="swiper-wrapper">
+			{#each thumbnails as thumbnail, i}
+				<div class="swiper-slide" style="width: auto;">
+					<button onclick={() => openPopup(i)} class="block outline-none">
+						<div class="flex items-center justify-center">
+							<img
+								alt="wedding couple shot"
+								src={thumbnail}
+								class="h-24 w-24 rounded object-cover sm:h-28 sm:w-28 md:h-32 md:w-32"
+							/>
+						</div>
+					</button>
+				</div>
+			{/each}
+		</div>
 	</div>
 
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -129,7 +150,7 @@
 			class="fixed left-1/2 top-1/2 flex h-full max-h-[80vh] w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-4 px-4 md:max-h-[90vh]"
 		>
 			<!-- Slider main container -->
-			<div class="swiper h-full w-full">
+			<div class="popup-swiper static h-full w-full">
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
 					<!-- Slides -->
@@ -189,7 +210,4 @@
 </div>
 
 <style>
-	div.swiper {
-		position: static;
-	}
 </style>
